@@ -39,6 +39,19 @@ class Knjiga extends Eloquent{
             ->get();
 		//return $this->hasMany('Komentar','knjiga_id');
 	}
+	public function proscenaOcena($id){
+		
+		$data= DB::table('komentari')
+            ->where('knjiga_id', '=', $id)
+            ->get();
+            $broj=0;
+            $uk=0;
+		foreach ($data as $result) {
+			$uk+=$result->ocena;
+			$broj++;
+		}
+		return $uk/$broj; 
+	}
 	public  function insertKomentar($knjiga,$user){
 		$input =Input::all();
 		DB::table('komentari')->insert(
