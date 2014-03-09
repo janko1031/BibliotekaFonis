@@ -20,6 +20,7 @@ Route::get('/spisakKnjiga', 'HomeController@prikaziKnjige');
 Route::controller('users', 'UsersController');
 Route::get('/', 'UsersController@getLogin');
 
+
 Route::get('/users/logout', 'UsersController@getLogout');
 Route::get('/home', 'HomeController@prikaziHome');
 Route::get('/error', 'HomeController@prikaziError');

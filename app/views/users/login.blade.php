@@ -15,8 +15,8 @@
          <div class="col-md-5">     
 </div>
 <div class="col-md-2">     
-<a href="register" >
-<button class="btn btn-lg btn-primary btn-block" type="submit" name="Login">Registruj se</button></a>
+<a href="{{ URL::action('UsersController@getRegister') }}" >
+<button class="btn btn-lg btn-primary btn-block" type="button" name="Login">Registruj se</button></a>
         </div>
 
      
