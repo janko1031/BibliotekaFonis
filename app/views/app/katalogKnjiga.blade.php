@@ -15,13 +15,14 @@
 
           </div>
           <div class="panel-body">
-          <div class="row">
-              <div class="pull-left">  <b>{{"Autor: "}}</b> {{$result->autor}}</div>
+         
+              <div class="pull-left">  <b>Autor:</b> {{$result->autor}}</div>
               <div class="pull-right">{{$result->godina_izdanja}}</div> 
-          </div>
-          <div class="row">
+        
+        <hr>
               <div class="pull-left"><b>Tehnologija: </b> {{$result->tehnologija}}  </div>
-       </div>
+               <div class="pull-right"><b>Br. strana: </b>{{$result->br_strana}}</div> 
+      
       </div>
   </div>
 
