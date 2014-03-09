@@ -19,7 +19,15 @@ Route::get('/spisakKnjiga', 'HomeController@prikaziKnjige');
 
 Route::controller('users', 'UsersController');
 Route::get('/', 'UsersController@getLogin');
-
+Route::post('login', array('before' => 'guest|csrf', function()
+{
+	if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password'))))
+	{
+		return Redirect::route('home');
+	}
+	
+	return View::make('login')->with('error', true);
+}));
 
 Route::get('/users/logout', 'UsersController@getLogout');
 Route::get('/home', 'HomeController@prikaziHome');

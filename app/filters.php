@@ -69,18 +69,4 @@ Route::filter('guest', function()
 | cross-site request forgery attacks. If this special token in a user
 | session does not match the one given in this request, we'll bail.
 |
-*//*staro
-Route::filter('csrf', function()
-{
-  if (Request::getMethod() !== 'GET' && Session::token() != Input::get('_token'))
-  {
-      throw new Illuminate\Session\TokenMismatchException;
-  }
-});/*/
-Route::filter('csrf', function()
-{
-	if (Session::token() != Input::get('_token'))
-	{
-		throw new Illuminate\Session\TokenMismatchException;
-	}
-});
+*
