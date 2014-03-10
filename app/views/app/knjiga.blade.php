@@ -112,34 +112,52 @@
 
 <hr>   
 @endforeach
+
+@if ($oceni)
 {{ Form::open(array('action' => 'KnjigeController@unesiKomentar', 'class'=>'bs-example form-horizontal')); }}
 <div class="form-group">
-  <label for="textArea" class="col-lg-2 control-label">Tekst komentara</label>
-  <div class="col-lg-10">
-    <textarea class="form-control" rows="3" name="komentar" data-validation="length" data-validation-length="min6" ></textarea>
+<label for="textArea" class="col-lg-2 control-label">Tekst komentara</label>
+<div class="col-lg-10">
+<textarea class="form-control" rows="3" name="komentar" data-validation="length" data-validation-length="min6" ></textarea>
 
-  </div>
+</div>
 </div>
 <div class="form-group">
-  <label for="select" class="col-lg-2 control-label">Ocena knjige</label>
-  <div class="col-lg-10">
-    <select  multiple="" class="form-control" name="ocena">                                  
+<label for="select" class="col-lg-2 control-label">Ocena knjige</label>
+<div class="col-lg-10">
+<select multiple="" class="form-control" name="ocena">
 
-      <option  value="1"> Ocena 1 </option>
-      <option  value="2"> Ocena 2 </option>
-      <option  value="3"> Ocena 3 </option>
-      <option  value="4"> Ocena 4 </option>
-      <option value="5"> Ocena 5 </option>
+<option value="1"> Ocena 1 </option>
+<option value="2"> Ocena 2 </option>
+<option value="3"> Ocena 3 </option>
+<option value="4"> Ocena 4 </option>
+<option value="5"> Ocena 5 </option>
 
-    </select>
-  </div>
+</select>
+</div>
 
 </div>
 
 <div class="text-right">
- {{ Form::submit('Komentarisi i oceni', array('class'=>'btn  btn-success '))}}
-</div>              
+{{ Form::submit('Komentarisi i oceni', array('class'=>'btn btn-success '))}}
+</div>
 </form>
+ @endif
+
+
+  @if (!$oceni)
+  {{ Form::open(array('action' => 'KnjigeController@izbrisiKomentar', 'class'=>'bs-example form-horizontal')); }}
+  <div class="alert alert-dismissable alert-danger">
+  <button type="button" class="close" data-dismiss="alert">×</button>
+   Mozete <strong>samo jednom</strong>  oceniti knjigu.
+</div>
+<input type="hidden" name="brisanje">
+<div class="text-right">
+ {{ Form::submit('Izbrisi svoj komentar', array('class'=>'btn  btn-danger '))}}
+</div> 
+</form>  
+   @endif
+
 </div>
 
 

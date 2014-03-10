@@ -45,6 +45,7 @@ Route::get('/katalogKnjiga', 'KnjigeController@prikaziKatalog');
 
 Route::post('/delete', 'KnjigeController@obrisi');
 Route::post('/knjiga', 'KnjigeController@unesiKomentar');
+Route::post('/komentar', 'KnjigeController@izbrisiKomentar');
 Route::post('/unos', 'KnjigeController@uradiUnos');
 Route::post('/azuriranje', 'KnjigeController@uradiAzuriranje');
 

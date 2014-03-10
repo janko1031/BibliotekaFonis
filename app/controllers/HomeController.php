@@ -25,10 +25,7 @@ class HomeController extends BaseController {
 			return	View::make('users.login')->with('title',$title)->with('message', 'Morate bit ulogovani da biste videli  stranu!');
 			}	
 		else return View::make('template')->with('title',$title)->with('content',$content)->with('user', Auth::user());
-	}
-	
-
-		
+	}		
 
 	public function prikaziError()
 	{
@@ -49,7 +46,6 @@ class HomeController extends BaseController {
 			}	
 		else return View::make('layouts.success')->with('title',$title);
 	}
-	
 
 
 		

@@ -79,12 +79,13 @@ class KnjigeController extends BaseController {
 		$data = with(new Knjiga)->komentari(101);
 		$content='app'.'.'.'knjiga';
 		$prosek = with(new Knjiga)->proscenaOcena(101);
+		$oceni = with(new Knjiga)->ocenjenaKnjiga(101,Auth::user()->id);
 		if (!Auth::check()) {
 			$title="Login";
 			return	View::make('users.login')->with('title',$title)->with('message', 'Morate bit ulogovani da biste videli  stranu!');
 			}	
 		else return View::make('template')->with('title',$title)->with('content',$content)->with('data',$data)
-			->with('user', Auth::user())->with('prosek',$prosek);
+			->with('user', Auth::user())->with('prosek',$prosek)->with('oceni',$oceni);;
 	}
 	public function prikaziKatalog()
 	{
@@ -192,5 +193,15 @@ class KnjigeController extends BaseController {
 
 
 				}
+public function izbrisiKomentar(){
 
-			}
+		//cuvaju se svi podaci iz forme Unos
+		$input =Input::all();
+		
+				with(new Knjiga)->izbrisiKomentar(Auth::user()->id);
+				return Redirect::to('/knjiga'); 
+
+				}
+
+	}
+	

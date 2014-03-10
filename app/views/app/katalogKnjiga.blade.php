@@ -11,7 +11,8 @@
       <div class="col-md-4 portfolio-item">
         <div class="panel panel-default">
           <div class="panel-heading">
-              <h5 class="panel-title"><a href="knjiga">{{$result->naziv}}</a></h5>
+              <h5 class="panel-title"><a href="knjiga"><b>{{$result->naziv}}</b></a></h5>
+
 
           </div>
           <div class="panel-body">
@@ -21,7 +22,14 @@
         
         <hr>
               <div class="pull-left"><b>Tehnologija: </b> {{$result->tehnologija}}  </div>
-               <div class="pull-right"><b>Br. strana: </b>{{$result->br_strana}}</div> 
+               </br>
+               <div class="pull-left"><b>Br. strana: </b>{{$result->br_strana}}</div> 
+               @if ($result->dostupnost == 1)
+            <div class="pull-right"> Dostupna: <span class="label label-success">DA</span></div>
+            @endif  
+            @if ($result->dostupnost == 0)
+            <div class="pull-right">Dostupna: <span class="label label-danger">NE</span></div>
+            @endif      
       
       </div>
   </div>
