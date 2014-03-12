@@ -19,6 +19,26 @@ Route::get('/spisakKnjiga', 'HomeController@prikaziKnjige');
 
 Route::controller('users', 'UsersController');
 Route::get('/', 'UsersController@getLogin');
+
+ /*Route::get('/', function()
+ {
+	Schema::create('knjige', function($table)
+ {
+ 	$table->increments('id');
+
+ $table->string('naziv', 32);
+
+ $table->integer('id_knjige');
+ $table->string('autor', 32);
+ $table->string('godina_izdanja', 32);
+ $table->string('tehnologija', 32);
+ $table->integer('br_strana');
+ $table->text('opis', 420);;
+ $table->boolean('dostupnost');
+	//$table->timestamps();
+
+ });
+ });*/
 Route::post('login', array('before' => 'guest|csrf', function()
 {
 	if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password'))))

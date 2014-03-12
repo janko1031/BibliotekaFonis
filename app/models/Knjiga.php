@@ -1,31 +1,55 @@
 <?php
 class Knjiga extends Eloquent{
-	
-	protected $table="knjige";
+	public static $rules = array(
+		//'naziv'=>'required|alpha|min:2',
+		//'id_knjige'=>'required|alpha|min:4',
+		//'autor'=>'required|alpha|min:4',
+		//'tehnologija'=>'required|alpha|min:4',
+		//'opis'=>'required|alpha|min:4'
+	);
 
+	protected $table="knjige";
+	public $timestamps = false;
+	
+	
 
 	public  function select(){
 		return DB::table('knjige')->get();
 	}
 	public  function insert(){
-		$input =Input::all();
-		DB::table('knjige')->insert(
-			array('ID'=>$input['ID'],'naziv'=>$input['naziv'],'autor'=>$input['autor'],'godina_izdanja'=>$input['godina'],'tehnologija'=>$input['tehnologija'],'opis'=>$input['opis'],'dostupnost'=>$input['dostupnost'])
-			);
+		$validator = Validator::make(Input::all(), Knjiga::$rules);
+
+		if ($validator->passes()) {
+			$knjiga = new Knjiga;
+			$knjiga->naziv = Input::get('naziv');
+			$knjiga->identifikator = Input::get('ID');
+			$knjiga->autor = Input::get('autor');
+			$knjiga->tehnologija =Input::get('tehnologija');
+			$knjiga->opis =Input::get('opis');
+			$knjiga->godina_izdanja =Input::get('godina');
+			$knjiga->br_strana =Input::get('br_strana');
+			$knjiga->dostupnost =Input::get('dostupnost');
+			$knjiga->save();
+
+			
+		} else {
+			return Redirect::to('error')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+		}
+
 
 
 	}
 	public  function delete(){
 		$input =Input::all();
 		$ID=$input['ID1'];
-		DB::table('knjige')->where('ID', $ID)->delete();
+		DB::table('knjige')->where('id', $ID)->delete();
 
 
 	}
 	public function zaduzenje(){
 		return DB::table('zaduzenja')
 		->join('users', 'korisnik_id', '=', 'users.id')
-		->join('knjige', 'knjiga_id', '=', 'knjige.ID')
+		->join('knjige', 'knjiga_id', '=', 'knjige.id')
 		->get();
 		//return $this->hasMany('Zaduzenje','knjiga_id');
 	}
@@ -33,9 +57,9 @@ class Knjiga extends Eloquent{
 		
 		return DB::table('komentari')
 		->leftJoin('users', 'korisnik_id', '=', 'users.id')
-		->leftJoin('knjige', 'knjiga_id', '=', 'knjige.ID')
+		->leftJoin('knjige', 'knjiga_id', '=', 'knjige.id')
 
-		->where('knjige.ID', '=', $id)
+		->where('knjige.id', '=', $id)
 		->orderBy('komentari.id', 'asc')
 		->get();
 		//return $this->hasMany('Komentar','knjiga_id');
@@ -47,11 +71,19 @@ class Knjiga extends Eloquent{
 		->get();
 		$broj=0;
 		$uk=0;
-		foreach ($data as $result) {
+		
+			foreach ($data as $result) {
 			$uk+=$result->ocena;
 			$broj++;
 		}
+		if (!empty($result)) {
 		return $uk/$broj; 
+		}
+		$uk=0;
+		if (empty($result)) {
+		return 0;
+		}
+		
 	}
 	public  function insertKomentar($knjiga,$user){
 		$input =Input::all();

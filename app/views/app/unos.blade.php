@@ -11,9 +11,9 @@
                            
                                 <div class="form-group">
                                     <input type="hidden" name="action" value="unos" />
-                                    <label  class="col-lg-2 control-label">ID knjige</label>
+                                    <label  class="col-lg-2 control-label">Identifikator knjige</label>
                                     <div class="col-lg-10">
-                                        <input type="text"  name="ID" class="form-control" data-validation="length" data-validation-length="min3"  placeholder="ID knjige"  >
+                                        <input type="text"  name="ID" class="form-control" data-validation="length" data-validation-length="min3"  placeholder="Identifikator knjige"  >
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -41,6 +41,13 @@
                                     <label  class="col-lg-2 control-label">Tehnologija</label>
                                     <div class="col-lg-10">
                                         <input type="text" name="tehnologija" class="form-control"  placeholder="opisana tehnologija" data-validation="length" data-validation-length="min3"  >
+
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label  class="col-lg-2 control-label">Broj strana</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" name="br_strana" class="form-control"  placeholder="broja strana"  data-validation="number" >
 
                                     </div>
                                 </div>

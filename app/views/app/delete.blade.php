@@ -14,7 +14,7 @@
 
 						@foreach ($data as $row)
 
-						<option  value="{{$row->ID}}"> {{$row->ID,": ", $row->naziv}} </option>
+						<option  value="{{$row->id}}"> {{$row->identifikator,": ", $row->naziv}} </option>
 
 						@endforeach 
 						</select>

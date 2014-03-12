@@ -28,7 +28,7 @@
           
           
           <tr>
-            <td>{{ $result->ID}} </td>
+            <td>{{ $result->identifikator}} </td>
             <td> {{ $result->naziv}}</td>
             <td>{{ $result->autor}}</td>
             <td>{{ $result->godina_izdanja}} </td>

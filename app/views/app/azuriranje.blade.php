@@ -13,7 +13,7 @@
                                         <select class="form-control" name="ID">
                 @foreach ($data as $row)
 
-                <option  value="{{$row->ID}}"> {{$row->ID,": ", $row->naziv}} </option>
+                <option  value="{{$row->id}}"> {{$row->identifikator,": ", $row->naziv}} </option>
   
                     @endforeach 
                 </select>
@@ -44,6 +44,13 @@
                                     <label  class="col-lg-2 control-label">Tehnologija</label>
                                     <div class="col-lg-10">
                                         <input type="text" name="tehnologija" class="form-control"  placeholder="opisana tehnologija" data-validation="length" data-validation-length="min3"  >
+
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label  class="col-lg-2 control-label">Broj strana</label>
+                                    <div class="col-lg-10">
+                                        <input type="text" name="br_strana" class="form-control"  placeholder="broja strana"  data-validation="number" >
 
                                     </div>
                                 </div>
