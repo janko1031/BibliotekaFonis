@@ -22,20 +22,18 @@ Route::get('/', 'UsersController@getLogin');
 
  /*Route::get('/', function()
  {
-	Schema::create('knjige', function($table)
+	/Schema::create('komentari2', function($table)
  {
  	$table->increments('id');
 
  $table->string('naziv', 32);
 
- $table->integer('id_knjige');
- $table->string('autor', 32);
- $table->string('godina_izdanja', 32);
- $table->string('tehnologija', 32);
- $table->integer('br_strana');
- $table->text('opis', 420);;
- $table->boolean('dostupnost');
-	//$table->timestamps();
+ $table->integer('knjiga_id');
+ $table->integer('user_id');
+ $table->string('komentar', 200);
+ $table->integer('ocena');
+ 
+ $table->timestamps();
 
  });
  });*/

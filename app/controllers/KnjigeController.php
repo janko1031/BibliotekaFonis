@@ -20,7 +20,7 @@ class KnjigeController extends BaseController {
 
 
 		$content='app'.'.'.'spisakKnjiga';
-		$data = with(new Knjiga)->select();
+		$data = with(new Knjiga)->knjige();
 		$title="Bibiloteka";
 		if (!Auth::check()) {
 			$title="Login";
@@ -33,7 +33,7 @@ class KnjigeController extends BaseController {
 	{
 		$title="Azuriranje";
 		$content='app'.'.'.'azuriranje';
-		$data = with(new Knjiga)->select();
+		$data = with(new Knjiga)->knjige();
 		
 
 		if (!Auth::check()) {
@@ -64,7 +64,7 @@ class KnjigeController extends BaseController {
 		$title="Brisanje knjige";
 		
 		$content='app'.'.'.'delete';
-		$data = with(new Knjiga)->select();
+		$data = with(new Knjiga)->knjige();
 
 		if (!Auth::check()) {
 			$title="Login";
@@ -77,21 +77,22 @@ class KnjigeController extends BaseController {
 	public function prikaziKnjigu()
 	{
 		$title="Prikaz knjige";
-		$data = with(new Knjiga)->komentari(1);
+		$komentari = with(new Komentar)->komentari(1);
+		$knjiga=with(new Knjiga)->nadjiKnjigu(1);
 		$content='app'.'.'.'knjiga';
-		$prosek = with(new Knjiga)->proscenaOcena(1);
-		$oceni = with(new Knjiga)->ocenjenaKnjiga(1,Auth::user()->id);
+		$prosek = with(new Komentar)->proscenaOcena(1);
+		$oceni = with(new Komentar)->ocenjenaKnjiga(1,Auth::user()->id);
 		if (!Auth::check()) {
 			$title="Login";
 			return	View::make('users.login')->with('title',$title)->with('message', 'Morate bit ulogovani da biste videli  stranu!');
 		}	
-		else return View::make('template')->with('title',$title)->with('content',$content)->with('data',$data)
+		else return View::make('template')->with('title',$title)->with('content',$content)->with('komentari',$komentari)->with('knjiga',$knjiga)
 			->with('user', Auth::user())->with('prosek',$prosek)->with('oceni',$oceni);;
 	}
 	public function prikaziKatalog()
 	{
 		$title="Prikaz katalog knjiga";
-		$data = with(new Knjiga)->select();
+		$data = with(new Knjiga)->knjige();
 		
 		$content='app'.'.'.'katalogKnjiga';
 
@@ -147,7 +148,7 @@ class KnjigeController extends BaseController {
 
 				}
 
-				public function obrisi(){
+	public function obrisi(){
 
 					with(new Knjiga)->delete();		
 
@@ -155,35 +156,21 @@ class KnjigeController extends BaseController {
 
 				}
 
-				public function unesiKomentar(){
+	public function unesiKomentar(){
 
-		//cuvaju se svi podaci iz forme Unos
+					with(new Komentar)->insertKomentar(1,Auth::user()->id);
+					return Redirect::to('/knjiga'); 		
+
+				}
+
+	public function izbrisiKomentar(){
+
+
 					$input =Input::all();
-					$rules=array
-					(
-						'komentar'=>'min:5'
 
-						);
+					with(new Komentar)->izbrisiKomentar(Auth::user()->id);
+					return Redirect::to('/knjiga'); 
 
-					$validator=Validator::make($input,$rules);
+				}
 
-					if ($validator->passes()) {
-						with(new Knjiga)->insertKomentar(1,Auth::user()->id);
-						return Redirect::to('/knjiga'); }
-
-						else{
-							return Redirect::to('/error');}
-
-
-						}
-						public function izbrisiKomentar(){
-
-		//cuvaju se svi podaci iz forme Unos
-							$input =Input::all();
-
-							with(new Knjiga)->izbrisiKomentar(Auth::user()->id);
-							return Redirect::to('/knjiga'); 
-
-						}
-
-					}
+			}

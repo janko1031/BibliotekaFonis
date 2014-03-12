@@ -5,9 +5,79 @@
 class Komentar extends Eloquent 
 {
 	protected $table="komentari";
+	public static $rules = array(
+		
+	);
 
 	public function knjiga()
 	{
 		return $this->belongsTo('Knjiga');
+	}
+	public function komentari($id){
+		
+		
+		return Knjiga::find($id)->komentari;
+	
+	}
+	public function proscenaOcena($id){
+		$data = Knjiga::find($id)->komentari;
+		
+		$broj=0;
+		$uk=0;
+		
+			foreach ($data as $result) {
+			$uk+=$result->ocena;
+			$broj++;
+		}
+		if (!empty($result)) {
+		return $uk/$broj; 
+		}
+		$uk=0;
+		if (empty($result)) {
+		return 0;
+		}
+		
+	}
+	public  function insertKomentar($knjiga,$user){
+
+
+		$validator = Validator::make(Input::all(), Komentar::$rules);
+
+		if ($validator->passes()) {
+			$komentar = new Komentar;
+			$komentar->knjiga_id = $knjiga;
+			$komentar->user_id = $user;
+			$komentar->komentar = Input::get('komentar');
+			$komentar->ocena =Input::get('ocena');
+			
+			$komentar->save();
+
+			
+		} else {
+			return Redirect::to('error')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+		}
+
+		
+
+
+	}
+	public  function ocenjenaKnjiga($knjiga,$user){
+		$oceni=true;
+		$results=DB::table('komentari')->where('knjiga_id','=',$knjiga)->get();
+		if (empty($result)) {        	
+			$oceni=true;
+		}
+		foreach ($results as $result) {
+			if ($result->user_id==$user) {
+				$oceni= false;
+				break;
+			}
+		}		
+		return $oceni;
+	}
+	public  function izbrisiKomentar($userId){
+		DB::table('komentari')->where('user_id', $userId)->delete();
+
+
 	}
 }

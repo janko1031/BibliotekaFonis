@@ -10,11 +10,28 @@ class Knjiga extends Eloquent{
 
 	protected $table="knjige";
 	public $timestamps = false;
-	
+	public function komentari()
+    {
+        return $this->hasMany('Komentar');
+    }
+	/*public $naziv;
+	public $autor;
+	public $identifikator;
+	public $godina_izdanja;
+	public $tehnologija;
+	public $br_strana;
+	public $opis;
+	public $dostupnost;
+	protected $fillable = array('naziv', 'autor', 'identifikator','godina_izdanja','tehnologija','br_strana','opis','dostupnost');*/
 	
 
-	public  function select(){
-		return DB::table('knjige')->get();
+	public  function knjige(){
+		return Knjiga::all();
+	}
+
+	public  function nadjiKnjigu($id){
+		$knjiga = Knjiga::find($id);
+		return $knjiga;
 	}
 	public  function insert(){
 		$validator = Validator::make(Input::all(), Knjiga::$rules);
@@ -40,10 +57,10 @@ class Knjiga extends Eloquent{
 
 	}
 	public  function delete(){
-		$input =Input::all();
-		$ID=$input['ID1'];
-		DB::table('knjige')->where('id', $ID)->delete();
+		$knjiga = Knjiga::find($ID);
 
+		$ID=$input['ID1'];
+		$user->delete();
 
 	}
 	public function zaduzenje(){
@@ -53,68 +70,7 @@ class Knjiga extends Eloquent{
 		->get();
 		//return $this->hasMany('Zaduzenje','knjiga_id');
 	}
-	public function komentari($id){
-		
-		return DB::table('komentari')
-		->leftJoin('users', 'korisnik_id', '=', 'users.id')
-		->leftJoin('knjige', 'knjiga_id', '=', 'knjige.id')
-
-		->where('knjige.id', '=', $id)
-		->orderBy('komentari.id', 'asc')
-		->get();
-		//return $this->hasMany('Komentar','knjiga_id');
-	}
-	public function proscenaOcena($id){
-		
-		$data= DB::table('komentari')
-		->where('knjiga_id', '=', $id)
-		->get();
-		$broj=0;
-		$uk=0;
-		
-			foreach ($data as $result) {
-			$uk+=$result->ocena;
-			$broj++;
-		}
-		if (!empty($result)) {
-		return $uk/$broj; 
-		}
-		$uk=0;
-		if (empty($result)) {
-		return 0;
-		}
-		
-	}
-	public  function insertKomentar($knjiga,$user){
-		$input =Input::all();
-
-
-
-		DB::table('komentari')->insert(
-			array('knjiga_id'=>$knjiga,'korisnik_id'=>$user,'komentar'=>$input['komentar'],'ocena'=>$input['ocena'])
-			);
-
-
-	}
-	public  function ocenjenaKnjiga($knjiga,$user){
-		$oceni=true;
-		$results=DB::table('komentari')->where('knjiga_id','=',$knjiga)->get();
-		if (empty($result)) {        	
-			$oceni=true;
-		}
-		foreach ($results as $result) {
-			if ($result->korisnik_id==$user) {
-				$oceni= false;
-				break;
-			}
-		}		
-		return $oceni;
-	}
-	public  function izbrisiKomentar($userId){
-		DB::table('komentari')->where('korisnik_id', $userId)->delete();
-
-
-	}
+	
 
 	
 }
