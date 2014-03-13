@@ -4,30 +4,30 @@
 
     <div class="row">
 
-      @foreach ($data as $result) 
+      @foreach ($knjige as $knjiga) 
 
 
 
       <div class="col-md-4 portfolio-item">
         <div class="panel panel-default">
           <div class="panel-heading">
-              <h5 class="panel-title"><a href="knjiga"><b>{{$result->naziv}}</b></a></h5>
+              <h5 class="panel-title"><a href="knjiga"><b>{{$knjiga->naziv}}</b></a></h5>
 
 
           </div>
           <div class="panel-body">
          
-              <div class="pull-left">  <b>Autor:</b> {{$result->autor}}</div>
-              <div class="pull-right">{{$result->godina_izdanja}}</div> 
+              <div class="pull-left">  <b>Autor:</b> {{$knjiga->autor}}</div>
+              <div class="pull-right">{{$knjiga->godina_izdanja}}</div> 
         
         <hr>
-              <div class="pull-left"><b>Tehnologija: </b> {{$result->tehnologija}}  </div>
+              <div class="pull-left"><b>Tehnologija: </b> {{$knjiga->tehnologija}}  </div>
                </br>
-               <div class="pull-left"><b>Br. strana: </b>{{$result->br_strana}}</div> 
-               @if ($result->dostupnost == 1)
-            <div class="pull-right"> Dostupna: <span class="label label-success">DA</span></div>
-            @endif  
-            @if ($result->dostupnost == 0)
+               <div class="pull-left"><b>Br. strana: </b>{{$knjiga->br_strana}}</div> 
+               @if ($knjiga->dostupnost == 1)           
+               <div class="pull-right"> Dostupna: <span class="label label-success">DA</span></div>
+                @endif  
+            @if ($knjiga->dostupnost == 0)
             <div class="pull-right">Dostupna: <span class="label label-danger">NE</span></div>
             @endif      
       

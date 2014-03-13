@@ -48,22 +48,22 @@
   <hr>
  
 
- @foreach ($komentari as $result)
+ @foreach ($komentari as $komentar)
 
   <div class="row">
     <div class="col-md-12">
 
     
     {{'Korisnik: '}}
-    {{  '<b>'.$result->firstname.'</b>' }}
-    {{ '<b>'.$result->lastname.'</b>'}}
-    <span class="pull-right">Vreme: {{$result->created_at}}</span>
+    {{  '<b>'.$komentar->firstname.'</b>' }}
+    {{ '<b>'.$komentar->lastname.'</b>'}}
+    <span class="pull-right">Vreme: {{$komentar->created_at}}</span>
     
-    <p>komentar: {{ $result->komentar }}</p>
+    <p>komentar: {{ $komentar->komentar }}</p>
   
      <?php 
      echo "Ocena: ";
-       switch ($result->ocena) {
+       switch ($komentar->ocena) {
       case 1:
       echo '<span class="glyphicon glyphicon-star"></span>
       <span class="glyphicon glyphicon-star-empty"></span>

@@ -24,19 +24,19 @@
          
 
          
-          @foreach ($data as $result) 
+          @foreach ($knjige as $knjiga) 
           
           
           <tr>
-            <td>{{ $result->identifikator}} </td>
-            <td> {{ $result->naziv}}</td>
-            <td>{{ $result->autor}}</td>
-            <td>{{ $result->godina_izdanja}} </td>
-            <td> {{ $result->tehnologija}}</td>
-            @if ($result->dostupnost == 1)
+            <td>{{ $knjiga->identifikator}} </td>
+            <td> {{ $knjiga->naziv}}</td>
+            <td>{{ $knjiga->autor}}</td>
+            <td>{{ $knjiga->godina_izdanja}} </td>
+            <td> {{ $knjiga->tehnologija}}</td>
+            @if ($knjiga->dostupnost == 1)
             <td><span class="label label-success">DA</span></td>
             @endif  
-            @if ($result->dostupnost == 0)
+            @if ($knjiga->dostupnost == 0)
             <td><span class="label label-danger">NE</span></td>
             @endif      
             
@@ -50,32 +50,9 @@
       </table>
 
 
-      <div class="col-md-12">
-
-        <div class="thumbnail">
-
-          <div class="caption-full">
-
-            <form class="bs-example form-horizontal"  action="funkcijeBaze.php" method="POST">
-              <input type="hidden" name="action" value="zaduzenje" />
-              <p><div id="popuni"></div></p>
-
-            </div>
-            <div id="pomocniDiv" style="display:none">
-
-              <div class="text-center">
-                <a class="btn btn-success"  onclick="unhide()">Prikazi ostale knjige</a>
-
-              </div>
-
-            </div>
-
-
-          </div>
-
-        </div>
-      </div>
-
+      
     </div>
 
   </div>
+
+</div>

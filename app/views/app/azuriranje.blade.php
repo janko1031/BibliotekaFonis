@@ -11,9 +11,9 @@
                                     <label  class="col-lg-2 control-label">ID knjige</label>
                                     <div class="col-lg-10">
                                         <select class="form-control" name="ID">
-                @foreach ($data as $row)
+                @foreach ($knjige as $knjiga)
 
-                <option  value="{{$row->id}}"> {{$row->identifikator,": ", $row->naziv}} </option>
+                <option  value="{{$knjiga->id}}"> {{$knjiga->identifikator,": ", $knjiga->naziv}} </option>
   
                     @endforeach 
                 </select>

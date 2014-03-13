@@ -3,18 +3,18 @@
 	<div class="well">
 
 
-		{{ Form::open(array('action' => 'KnjigeController@obrisi', 'class'=>'bs-example form-horizontal')); }}
+		{{ Form::open(array('action' => 'KnjigeController@obrisiKnjigu', 'class'=>'bs-example form-horizontal')); }}
 		<fieldset>
 			<legend>Brisanje knjige iz baze</legend>
 			<div class="form-group">
 				<label  class="col-lg-2 control-label">Izaberite knjigu za brisanje</label>
 
 				<div class="col-lg-10">
-					<select  multiple="" class="form-control" name="ID1">
+					<select  multiple="" class="form-control" name="id">
 
-						@foreach ($data as $row)
+						@foreach ($knjige as $knjiga)
 
-						<option  value="{{$row->id}}"> {{$row->identifikator,": ", $row->naziv}} </option>
+						<option  value="{{$knjiga->id}}"> {{$knjiga->identifikator,": ", $knjiga->naziv}} </option>
 
 						@endforeach 
 						</select>

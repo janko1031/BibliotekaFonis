@@ -33,7 +33,7 @@ class Knjiga extends Eloquent{
 		$knjiga = Knjiga::find($id);
 		return $knjiga;
 	}
-	public  function insert(){
+	public  function ubaciKnjigu(){
 		$validator = Validator::make(Input::all(), Knjiga::$rules);
 
 		if ($validator->passes()) {
@@ -56,11 +56,11 @@ class Knjiga extends Eloquent{
 
 
 	}
-	public  function delete(){
-		$knjiga = Knjiga::find($ID);
+	public  function izbaciKnjigu(){
 
-		$ID=$input['ID1'];
-		$user->delete();
+		$ID= Input::get('id');
+		$knjiga = Knjiga::find($ID);		
+		$knjiga->delete();
 
 	}
 	public function zaduzenje(){

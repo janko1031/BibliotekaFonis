@@ -38,7 +38,7 @@ class Komentar extends Eloquent
 		}
 		
 	}
-	public  function insertKomentar($knjiga,$user){
+	public  function ubaciKomentar($knjiga,$user){
 
 
 		$validator = Validator::make(Input::all(), Komentar::$rules);
