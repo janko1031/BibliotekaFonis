@@ -21,7 +21,7 @@
           
            
          
-          <li><a href="">Prikazi profil</a></li>
+          <li><a href="profil">Prikazi profil</a></li>
           <li class="divider"></li>
           <li><a href="#">Separated link</a></li>
         </ul>

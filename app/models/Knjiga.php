@@ -37,6 +37,8 @@ class Knjiga extends Eloquent{
 		$knjiga = Knjiga::find($id);
 		return $knjiga;
 	}
+	
+
 	public  function ubaciKnjigu(){
 		$validator = Validator::make(Input::all(), Knjiga::$rules);
 

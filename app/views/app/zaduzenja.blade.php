@@ -29,7 +29,7 @@
                   
                   
                   <tr>
-                    <td>{{ $zaduzenje->identifikator}} </td>
+                    <td>{{ $zaduzenje->id}} </td>
                     <td> {{ $zaduzenje->naziv}}</td>
                     <td>{{ $zaduzenje->autor}}</td>
                     <td> {{ $zaduzenje->tehnologija}}</td>

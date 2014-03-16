@@ -161,6 +161,11 @@ class KnjigeController extends BaseController {
 			return Redirect::to('/zaduzenja'); 		
 
 			}
+	public function  razduziKnjigu(){
+		$zaduzenje= new Zaduzenje();
+		$zaduzenje->razduziKnjigu();
+			return Redirect::to('/zaduzenja'); 		
 
+			}		
 	
 }

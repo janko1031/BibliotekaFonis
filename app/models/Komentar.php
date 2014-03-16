@@ -13,6 +13,10 @@ class Komentar extends Eloquent
 	{
 		return $this->belongsTo('Knjiga');
 	}
+	public function user()
+	{
+		return $this->belongsTo('Users');
+	}
 	public function komentari($id){
 		
 		
@@ -78,6 +82,10 @@ class Komentar extends Eloquent
 	public  function izbrisiKomentar($userId){
 		DB::table('komentari')->where('user_id', $userId)->delete();
 
+	}
+
+	public  function komentariKorisnika($id){
+		return User::find($id)->komentari;
 
 	}
 }

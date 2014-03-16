@@ -56,7 +56,7 @@ Route::get('/spisakKnjiga', 'KnjigeController@prikaziKnjige');
 Route::get('/delete', 'KnjigeController@prikaziDelete');
 Route::get('/knjiga', 'KnjigeController@prikaziKnjigu');
 Route::get('/katalogKnjiga', 'KnjigeController@prikaziKatalog');
-
+Route::get('/profil', 'UsersController@prikaziProfil');
 
 Route::post('/delete', 'KnjigeController@obrisiKnjigu');
 Route::post('/knjiga', 'KnjigeController@unesiKomentar');
@@ -64,6 +64,6 @@ Route::post('/komentar', 'KnjigeController@izbrisiKomentar');
 Route::post('/unos', 'KnjigeController@uradiUnos');
 Route::post('/azuriranje', 'KnjigeController@uradiAzuriranje');
 Route::post('/zaduzenja', 'KnjigeController@dodajZaduzenje');
-
+Route::post('/profil', 'KnjigeController@razduziKnjigu');
 
 Route::resource('posts', 'PostsController');

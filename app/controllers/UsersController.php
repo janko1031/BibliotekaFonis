@@ -61,9 +61,24 @@ class UsersController extends BaseController {
 
 	public function getLogout() {
 		Auth::logout();
-		echo "yeah bitch";
+		
 		return Redirect::to('users/login')->with('message', 'Your are now logged out!');
 	}
-	
+	public function prikaziProfil()
+	{
+		$title="Profil korisnika ".Auth::user()->username;
+		$content='app'.'.'.'profil';
+		
+		$zaduzenje = new Zaduzenje();
+		$zaduzenja=$zaduzenje->zaduzenjaKorisnika(Auth::user()->id);
+		$komentar = new Komentar();
+		$komentari=$komentar->komentariKorisnika(Auth::user()->id);
+		if (!Auth::check()) {
+			$title="Login";
+			return	View::make('users.login')->with('title',$title)->with('message', 'Morate bit ulogovani da biste videli  stranu!');
+		}	
+		else return View::make('template')->with('zaduzenja',$zaduzenja)->with('komentari',$komentari)->with('title',$title)->with('content',$content)
+			->with('user', Auth::user());
+	}
 	
 }
