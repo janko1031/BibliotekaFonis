@@ -14,6 +14,10 @@ class Knjiga extends Eloquent{
     {
         return $this->hasMany('Komentar');
     }
+    public function zaduzenja()
+    {
+        return $this->hasMany('Zaduzenje');
+    }
 	/*public $naziv;
 	public $autor;
 	public $identifikator;
@@ -56,6 +60,31 @@ class Knjiga extends Eloquent{
 
 
 	}
+	public  function azurirajKnjigu(){
+		$validator = Validator::make(Input::all(), Knjiga::$rules);
+
+		if ($validator->passes()) {
+
+			$knjiga = Knjiga::find(Input::get('ID'));
+
+			$knjiga->naziv = Input::get('naziv');
+			$knjiga->identifikator = Input::get('ID');
+			$knjiga->autor = Input::get('autor');
+			$knjiga->tehnologija =Input::get('tehnologija');
+			$knjiga->opis =Input::get('opis');
+			$knjiga->godina_izdanja =Input::get('godina');
+			$knjiga->br_strana =Input::get('br_strana');
+			$knjiga->dostupnost =Input::get('dostupnost');
+			$knjiga->save();
+
+			
+		} else {
+			return Redirect::to('error')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+		}
+
+
+
+	}
 	public  function izbaciKnjigu(){
 
 		$ID= Input::get('id');
@@ -63,13 +92,7 @@ class Knjiga extends Eloquent{
 		$knjiga->delete();
 
 	}
-	public function zaduzenje(){
-		return DB::table('zaduzenja')
-		->join('users', 'korisnik_id', '=', 'users.id')
-		->join('knjige', 'knjiga_id', '=', 'knjige.id')
-		->get();
-		//return $this->hasMany('Zaduzenje','knjiga_id');
-	}
+	
 	
 
 	

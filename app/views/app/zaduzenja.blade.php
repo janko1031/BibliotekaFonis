@@ -11,13 +11,14 @@
             <table class="table table-striped table-bordered table-hover" id="tabela">
                 <thead>
                     <tr>
-                        <th>#</th>
+                        <th>Redni br</th>
                         <th>Naziv</th>
                         <th>Autor</th>
                         
                         <th>Tehnologija</th>
                         <th>Datum uzimanja</th>
                         <th>Korisnik</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -32,9 +33,9 @@
                     <td> {{ $zaduzenje->naziv}}</td>
                     <td>{{ $zaduzenje->autor}}</td>
                     <td> {{ $zaduzenje->tehnologija}}</td>
-                    <td>{{ $zaduzenje->datum}} </td>
+                    <td>{{ $zaduzenje->created_at}} </td>
                     
-                    <td> {{ $zaduzenje->lastname }}</td>
+                    <td> {{$zaduzenje->firstname ." ". $zaduzenje->lastname }}</td>
                     
                     
                     

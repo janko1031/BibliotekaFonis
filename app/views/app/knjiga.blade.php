@@ -136,7 +136,10 @@
 </div>
 
 <div class="text-right">
-{{ Form::submit('Komentarisi i oceni', array('class'=>'btn btn-success '))}}
+
+<button class="btn btn-success" type="submit">
+       Komentarisi i oceni  <i class="glyphicon glyphicon-comment"></i>  </button>
+ 
 </div>
 </form>
  @endif
@@ -150,7 +153,10 @@
 </div>
 <input type="hidden" name="brisanje">
 <div class="text-right">
- {{ Form::submit('Izbrisi svoj komentar', array('class'=>'btn  btn-danger '))}}
+
+<button class="btn btn-danger" type="submit">
+       Izbrisi svoj komentar   <i class="glyphicon glyphicon-trash"></i>  </button>
+ 
 </div> 
 </form>  
    @endif

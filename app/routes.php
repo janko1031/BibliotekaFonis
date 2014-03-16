@@ -20,19 +20,16 @@ Route::get('/spisakKnjiga', 'HomeController@prikaziKnjige');
 Route::controller('users', 'UsersController');
 Route::get('/', 'UsersController@getLogin');
 
- /*Route::get('/', function()
+/* Route::get('/', function()
  {
-	/Schema::create('komentari2', function($table)
+	Schema::create('zaduzenja2', function($table)
  {
  	$table->increments('id');
 
- $table->string('naziv', 32);
 
  $table->integer('knjiga_id');
  $table->integer('user_id');
- $table->string('komentar', 200);
- $table->integer('ocena');
- 
+
  $table->timestamps();
 
  });
@@ -66,6 +63,7 @@ Route::post('/knjiga', 'KnjigeController@unesiKomentar');
 Route::post('/komentar', 'KnjigeController@izbrisiKomentar');
 Route::post('/unos', 'KnjigeController@uradiUnos');
 Route::post('/azuriranje', 'KnjigeController@uradiAzuriranje');
+Route::post('/zaduzenja', 'KnjigeController@dodajZaduzenje');
 
 
 Route::resource('posts', 'PostsController');

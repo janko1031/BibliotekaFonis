@@ -50,10 +50,10 @@ class KnjigeController extends BaseController {
 		$title="Zaduzenja";
 		$content='app'.'.'.'zaduzenja';
 
-		$knjiga = new Knjiga();
+		$zaduzenje = new Zaduzenje();
 
 
-		$zaduzenja=$knjiga->zaduzenje();
+		$zaduzenja=$zaduzenje->zaduzenje();
 		
 		if (!Auth::check()) {
 			$title="Login";
@@ -124,35 +124,9 @@ class KnjigeController extends BaseController {
 	}
 
 	public function uradiAzuriranje(){
-			$input =Input::all();//Ovo tek treba da sredim
-			$naziv=$input['naziv'] ;
-			$autor=$input['autor'];
-			$dostupnost=$input['dostupnost'];
-			$ID=$input['ID'];
-			$godina=$input['godina'];
-			$broj=$input['br_strana'];
-			$opis=$input['opis'] ;
-			$tehnologija=$input['tehnologija'] ;
-			$rules=array
-			(//'ID'=>'min:3', 
-				/*'naziv'=>'min:3',
-				'autor'=>'min:3',
-				'godina'=>'min:4',
-				'tehnologija'=>'min:3',
-				'opis'=>'min:5'*/
-				);
-
-			$validator=Validator::make($input,$rules);
-
-			if ($validator->passes()) {
-				DB::table('knjige')
-				->where('id', $ID)
-				->update(array('naziv' => $naziv,'autor'=>$autor,'opis' => $opis,'godina_izdanja'=>$godina, 'tehnologija' => $tehnologija,'br_strana'=>$broj, 'dostupnost'=>$dostupnost));
-				
-				return Redirect::to('/success'); }
-
-				else{
-					return Redirect::to('/error');}
+				$knjiga=new Knjiga();
+		$knjiga->azurirajKnjigu();	
+		return Redirect::to('/spisakKnjiga');
 
 				}
 
@@ -163,6 +137,8 @@ class KnjigeController extends BaseController {
 		return Redirect::to('/success'); 			
 
 				}
+
+
 
 	public function unesiKomentar(){
 			$komentar= new Komentar();
@@ -178,4 +154,13 @@ class KnjigeController extends BaseController {
 
 				}
 
+
+	public function  dodajZaduzenje(){
+		$zaduzenje= new Zaduzenje();
+		$zaduzenje->dodajZaduzenje(Auth::user()->id);
+			return Redirect::to('/zaduzenja'); 		
+
 			}
+
+	
+}
