@@ -34,7 +34,7 @@
                     <td>
             {{ Form::open(array('action' => 'KnjigeController@razduziKnjigu', 'class'=>'bs-example form-horizontal')); }}    
       		  <input type="hidden" name="id_knjige" value="{{$zaduzenje->knjiga_id}}">
-      		    <input type="text" name="id_zad" value="{{$zaduzenje->id}}">
+      		    <input type="hidden" name="id_zad" value="{{$zaduzenje->id}}">
        			<button class="btn btn-danger">
         		  Razduzi <i class="glyphicon glyphicon-ban-circle"></i></button>
 

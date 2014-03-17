@@ -4,7 +4,7 @@
 
     <div class="col-lg-12">
         <div class="page-header">
-            <h1 >Spisak Zaduzenja</h1>
+            <h1 >Spisak svih evidentiranih zaduzenja</h1>
         </div>
 
         <div class="bs-example table-responsive">
@@ -38,10 +38,10 @@
                     <td> {{ $zaduzenje->tehnologija}}</td>
 
                      @if($zaduzenje->vracena==1)
-                         <td><span class="label label-success">Vracena</span></td>
+                         <td><span class="label label-success">Vracena</span>  {{ $zaduzenje->updated_at}}</td>
                          @endif 
                         @if($zaduzenje->vracena==0)
-                        <td><span class="label label-info">Zaduzena</span> </td>
+                        <td><span class="label label-info">Zaduzena</span> {{ $zaduzenje->updated_at}} </td>
                          @endif
                    
                     

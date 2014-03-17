@@ -45,15 +45,33 @@ class KnjigeController extends BaseController {
 			->with('user', Auth::user());
 	}
 
-	public function prikaziZaduzenja()
+	public function prikaziSvaZaduzenja()
 	{
 		$title="Zaduzenja";
-		$content='app'.'.'.'zaduzenja';
+		$content='app'.'.'.'svaZaduzenja';
 
 		$zaduzenje = new Zaduzenje();
 		
 
-		$zaduzenja=$zaduzenje->zaduzenja();
+		$zaduzenja=$zaduzenje->svaZaduzenja();
+		
+		
+		if (!Auth::check()) {
+			$title="Login";
+			return	View::make('users.login')->with('title',$title)->with('message', 'Morate bit ulogovani da biste videli  stranu!');
+		}	
+		else return View::make('template')->with('zaduzenja',$zaduzenja)->with('title',$title)->with('content',$content)
+			->with('user', Auth::user());
+	}
+	public function prikaziZaduzene()
+	{
+		$title="Zaduzenja";
+		$content='app'.'.'.'zaduzeneKnjige';
+
+		$zaduzenje = new Zaduzenje();
+		
+
+		$zaduzenja=$zaduzenje->vratiZaduzeneKnjige();
 		
 		
 		if (!Auth::check()) {
@@ -165,7 +183,7 @@ class KnjigeController extends BaseController {
 	public function  razduziKnjigu(){
 		$zaduzenje= new Zaduzenje();
 		$zaduzenje->razduziKnjigu();
-			return Redirect::to('/zaduzenja'); 		
+			return Redirect::to('/svaZaduzenja'); 		
 
 			}		
 	

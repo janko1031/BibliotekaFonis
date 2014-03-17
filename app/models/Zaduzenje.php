@@ -11,10 +11,20 @@ class Zaduzenje extends Eloquent
 		return $this->belongsTo('Knjiga');
 	}
 	
-	public function zaduzenja(){
+	public function svaZaduzenja(){
 		return DB::table('zaduzenja')
 		->leftjoin('users', 'user_id', '=', 'users.id')
 		->leftjoin('knjige', 'knjiga_id', '=', 'knjige.id')
+		->select('zaduzenja.*', 'users.firstname', 'users.lastname', 'knjige.naziv', 'knjige.tehnologija', 'knjige.autor')
+		->get();
+		//return Knjiga::find(Input::get('id_knjige'))->zaduzenja;
+	}
+	public function vratiZaduzeneKnjige(){
+		return DB::table('zaduzenja')
+		->leftjoin('users', 'user_id', '=', 'users.id')
+		->leftjoin('knjige', 'knjiga_id', '=', 'knjige.id')
+		->where('vracena','=',false)
+		->select('zaduzenja.*', 'users.firstname', 'users.lastname', 'knjige.naziv', 'knjige.tehnologija', 'knjige.autor')
 		->get();
 		//return Knjiga::find(Input::get('id_knjige'))->zaduzenja;
 	}

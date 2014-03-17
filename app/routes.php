@@ -51,12 +51,14 @@ Route::get('/success', 'HomeController@prikaziSuccess');
 
 Route::get('/unos', 'KnjigeController@prikaziUnos');
 Route::get('/azuriranje', 'KnjigeController@prikaziAzuriranje');
-Route::get('/zaduzenja', 'KnjigeController@prikaziZaduzenja');
+Route::get('/svaZaduzenja', 'KnjigeController@prikaziSvaZaduzenja');
 Route::get('/spisakKnjiga', 'KnjigeController@prikaziKnjige');
 Route::get('/delete', 'KnjigeController@prikaziDelete');
 Route::get('/knjiga', 'KnjigeController@prikaziKnjigu');
 Route::get('/katalogKnjiga', 'KnjigeController@prikaziKatalog');
 Route::get('/profil', 'UsersController@prikaziProfil');
+Route::get('/zaduzeneKnjige', 'KnjigeController@prikaziZaduzene');
+
 
 Route::post('/delete', 'KnjigeController@obrisiKnjigu');
 Route::post('/knjiga', 'KnjigeController@unesiKomentar');
