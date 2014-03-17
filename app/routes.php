@@ -11,8 +11,8 @@
 |
 */
 
-	
-	
+
+
 
 
 Route::get('/spisakKnjiga', 'HomeController@prikaziKnjige');
@@ -21,7 +21,7 @@ Route::controller('users', 'UsersController');
 Route::get('/', 'UsersController@getLogin');
 
 /* Route::get('/', function()
- {
+ {/*
 	Schema::create('zaduzenja2', function($table)
  {
  	$table->increments('id');
@@ -32,8 +32,13 @@ Route::get('/', 'UsersController@getLogin');
 
  $table->timestamps();
 
- });
- });*/
+});*/
+
+
+
+/* role attach alias 
+
+});*/
 Route::post('login', array('before' => 'guest|csrf', function()
 {
 	if (Auth::attempt(array('username' => Input::get('username'), 'password' => Input::get('password'))))
@@ -43,21 +48,40 @@ Route::post('login', array('before' => 'guest|csrf', function()
 	
 	return View::make('login')->with('error', true);
 }));
+Route::filter('role', function()
+{ 
+	$user= new User();	
+	if (  !$user->isAdmin()) {
+    
+		return Redirect::to('/noAccess'); 
+	}
+}); 
 
+Route::group(array('before' => 'role'), function() {
+	Route::get('/unos', 'KnjigeController@prikaziUnos');
+	Route::get('/azuriranje', 'KnjigeController@prikaziAzuriranje');
+	Route::get('/svaZaduzenja', 'KnjigeController@prikaziSvaZaduzenja');
+	Route::get('/delete', 'KnjigeController@prikaziDelete');
+	Route::get('/profil', 'UsersController@prikaziProfil');
+	Route::get('/zaduzeneKnjige', 'KnjigeController@prikaziZaduzene');
+
+
+});
 Route::get('/users/logout', 'UsersController@getLogout');
 Route::get('/home', 'HomeController@prikaziHome');
 Route::get('/error', 'HomeController@prikaziError');
 Route::get('/success', 'HomeController@prikaziSuccess');
+Route::get('/noAccess', 'HomeController@prikaziNoAccess');
 
-Route::get('/unos', 'KnjigeController@prikaziUnos');
-Route::get('/azuriranje', 'KnjigeController@prikaziAzuriranje');
-Route::get('/svaZaduzenja', 'KnjigeController@prikaziSvaZaduzenja');
-Route::get('/spisakKnjiga', 'KnjigeController@prikaziKnjige');
-Route::get('/delete', 'KnjigeController@prikaziDelete');
+
+
+
+
+
 Route::get('/knjiga', 'KnjigeController@prikaziKnjigu');
+Route::get('/spisakKnjiga', 'KnjigeController@prikaziKnjige');
 Route::get('/katalogKnjiga', 'KnjigeController@prikaziKatalog');
-Route::get('/profil', 'UsersController@prikaziProfil');
-Route::get('/zaduzeneKnjige', 'KnjigeController@prikaziZaduzene');
+
 
 
 Route::post('/delete', 'KnjigeController@obrisiKnjigu');

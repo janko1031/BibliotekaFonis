@@ -28,8 +28,10 @@ class UsersController extends BaseController {
 			$user->firstname = Input::get('firstname');
 			$user->lastname = Input::get('lastname');
 			$user->email = Input::get('email');
-			$user->password = Hash::make(Input::get('password'));
+			$user->password = Hash::make(Input::get('password'));		
+			
 			$user->save();
+			$user->roles()->attach(2); 
 
 			return Redirect::to('users/login')->with('message', 'Thanks for registering!');
 		} else {
@@ -67,10 +69,11 @@ class UsersController extends BaseController {
 	public function prikaziProfil()
 	{
 		$title="Profil korisnika ".Auth::user()->username;
-		$content='app'.'.'.'profil';
+		$content='admin'.'.'.'profil';
 		
 		$zaduzenje = new Zaduzenje();
 		$zaduzenja=$zaduzenje->zaduzenjaKorisnika(Auth::user()->id);
+		
 		$komentar = new Komentar();
 		$komentari=$komentar->komentariKorisnika(Auth::user()->id);
 		if (!Auth::check()) {

@@ -19,6 +19,7 @@ class HomeController extends BaseController {
 		public function prikaziHome()
 	{
 		$content='app'.'.'.'home';
+		
 		$title="Pocetna";
 		if (!Auth::check()) {
 			$title="Login";
@@ -45,6 +46,17 @@ class HomeController extends BaseController {
 			return	View::make('users.login')->with('title',$title)->with('message', 'Morate bit ulogovani da biste videli  stranu!');
 			}	
 		else return View::make('layouts.success')->with('title',$title);
+	}
+	public function prikaziNoAccess()
+	{
+		$title="Access Denied";
+		$content='layouts'.'.'.'noAccess';
+		if (!Auth::check()) {
+			$title="Login";
+			return	View::make('users.login')->with('title',$title)->with('message', 'Morate bit ulogovani da biste videli  stranu!');
+
+			}	
+		return	View::make('template')->with('title',$title)->with('content',$content)->with('user', Auth::user());
 	}
 
 

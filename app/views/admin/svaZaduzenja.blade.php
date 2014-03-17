@@ -1,11 +1,10 @@
-
-
+          
 
 <div class="col-md-9">
 
     <div class="col-lg-12">
         <div class="page-header">
-            <h1 >Spisak trentno zaduzenih knjiga</h1>
+            <h1 >Spisak svih evidentiranih zaduzenja</h1>
         </div>
 
         <div class="bs-example table-responsive">
@@ -18,7 +17,7 @@
                         
                         <th>Tehnologija</th>
                         
-                         <th>Datum i Vreme </th>
+                         <th>Status i Vreme </th>
                     
                    
                         <th>Korisnik</th>
@@ -39,25 +38,16 @@
                     <td> {{ $zaduzenje->tehnologija}}</td>
 
                      @if($zaduzenje->vracena==1)
-                         <td>{{ $zaduzenje->created_at}}</td>
+                         <td><span class="label label-success">Vracena</span>  {{ $zaduzenje->updated_at}}</td>
                          @endif 
                         @if($zaduzenje->vracena==0)
-                        <td> {{ $zaduzenje->created_at}}</td>
+                        <td><span class="label label-warning">Zaduzena</span> {{ $zaduzenje->updated_at}} </td>
                          @endif
                    
                     
                     <td> {{$zaduzenje->firstname ." ". $zaduzenje->lastname }}</td>
                     
-                    <td>
-            {{ Form::open(array('action' => 'KnjigeController@razduziKnjigu', 'class'=>'bs-example form-horizontal')); }}    
-             <input type="hidden" name="id_knjige" value="{{$zaduzenje->knjiga_id}}">
-      		    <input type="hidden" name="id_zad" value="{{$zaduzenje->id}}">
-                <button class="btn btn-sm btn-info">
-                  Razduzi <i class="glyphicon glyphicon-ban-circle"></i></button>
-
-         {{Form::close()}}</td>
-
-
+                    
                     
                     
                 </tr>

@@ -2,8 +2,11 @@
 
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
-
+use Zizaco\Entrust\HasRole;
 class User extends Eloquent implements UserInterface, RemindableInterface {
+	use HasRole;
+
+
 
 	public static $rules = array(
 		'firstname'=>'required|alpha|min:2',
@@ -26,6 +29,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
      public function komentari()
     {
         return $this->hasMany('Komentar');
+    }
+    public function assigned_roles()
+    {
+        return $this->hasMany('Assigned');
     }
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -63,5 +70,32 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	{
 		return $this->email;
 	}
+	 public function get_role()
+    {
+
+       $results=  DB::table('assigned_roles')
+		->leftjoin('roles', 'role_id', '=', 'roles.id')
+		->where('user_id','=',Auth::user()->id)
+		->get();
+		foreach ($results as $res) {
+			$role=$res->name;
+		}
+		return $role;
+    }
+    public function isAdmin()    {
+    
+       $results=  DB::table('assigned_roles')
+		->leftjoin('roles', 'role_id', '=', 'roles.id')
+		->where('user_id','=',Auth::user()->id)
+		->get();
+		foreach ($results as $res) {
+			$role=$res->role_id;
+		}
+		if ($role==1) {
+		 	return true;
+		 }
+		 else return false ;
+    }
+
 
 }

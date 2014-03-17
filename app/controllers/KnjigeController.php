@@ -6,7 +6,7 @@ class KnjigeController extends BaseController {
 	{
 		
 		$title="Unos";
-		$content='app'.'.'.'unos';
+		$content='admin'.'.'.'unos';
 
 		if (!Auth::check()) {
 			$title="Login";
@@ -32,7 +32,7 @@ class KnjigeController extends BaseController {
 	public function prikaziAzuriranje()
 	{
 		$title="Azuriranje";
-		$content='app'.'.'.'azuriranje';
+		$content='admin'.'.'.'azuriranje';
 
 		$knjiga=new Knjiga();	
 		
@@ -48,7 +48,7 @@ class KnjigeController extends BaseController {
 	public function prikaziSvaZaduzenja()
 	{
 		$title="Zaduzenja";
-		$content='app'.'.'.'svaZaduzenja';
+		$content='admin'.'.'.'svaZaduzenja';
 
 		$zaduzenje = new Zaduzenje();
 		
@@ -66,7 +66,7 @@ class KnjigeController extends BaseController {
 	public function prikaziZaduzene()
 	{
 		$title="Zaduzenja";
-		$content='app'.'.'.'zaduzeneKnjige';
+		$content='admin'.'.'.'zaduzeneKnjige';
 
 		$zaduzenje = new Zaduzenje();
 		
@@ -84,7 +84,7 @@ class KnjigeController extends BaseController {
 	public function prikaziDelete()
 	{
 		$title="Brisanje knjige";		
-		$content='app'.'.'.'delete';
+		$content='admin'.'.'.'delete';
 
 		
 		$knjiga = new Knjiga();
