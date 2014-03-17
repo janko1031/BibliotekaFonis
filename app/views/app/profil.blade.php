@@ -14,7 +14,7 @@
                         <th>Autor</th>                        
                         <th>Tehnologija</th>
                         <th>Datum uzimanja</th>
-                        <th>Korisnik</th>
+                        <th>Vracanje</th>
 
                     </tr>
                 </thead>
@@ -23,8 +23,7 @@
 
                    
                   @foreach ($zaduzenja as $zaduzenje) 
-                  
-                  
+                  @if($zaduzenje->vracena==0) 
                   <tr>
                     <td>{{ $zaduzenje->id}} </td>
                     <td> {{ $zaduzenje->naziv}}</td>
@@ -35,9 +34,9 @@
                     <td>
             {{ Form::open(array('action' => 'KnjigeController@razduziKnjigu', 'class'=>'bs-example form-horizontal')); }}    
       		  <input type="hidden" name="id_knjige" value="{{$zaduzenje->knjiga_id}}">
-      		    <input type="hidden" name="id" value="{{$zaduzenje->id}}">
-       			 <a href="#" type="submit"><button class="btn btn-danger">
-        		  Razduzi <i class="glyphicon glyphicon-ban-circle"></i></button></a>
+      		    <input type="text" name="id_zad" value="{{$zaduzenje->id}}">
+       			<button class="btn btn-danger">
+        		  Razduzi <i class="glyphicon glyphicon-ban-circle"></i></button>
 
          {{Form::close()}}</td>
                     
@@ -45,6 +44,7 @@
                     
                     
                 </tr>
+                @endif
                 @endforeach
 
 

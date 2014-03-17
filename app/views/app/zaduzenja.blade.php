@@ -16,7 +16,10 @@
                         <th>Autor</th>
                         
                         <th>Tehnologija</th>
-                        <th>Datum uzimanja</th>
+                        
+                         <th>Status </th>
+                    
+                   
                         <th>Korisnik</th>
 
                     </tr>
@@ -33,7 +36,14 @@
                     <td> {{ $zaduzenje->naziv}}</td>
                     <td>{{ $zaduzenje->autor}}</td>
                     <td> {{ $zaduzenje->tehnologija}}</td>
-                    <td>{{ $zaduzenje->created_at}} </td>
+
+                     @if($zaduzenje->vracena==1)
+                         <td><span class="label label-success">Vracena</span></td>
+                         @endif 
+                        @if($zaduzenje->vracena==0)
+                        <td><span class="label label-info">Zaduzena</span> </td>
+                         @endif
+                   
                     
                     <td> {{$zaduzenje->firstname ." ". $zaduzenje->lastname }}</td>
                     

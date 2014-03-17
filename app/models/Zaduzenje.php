@@ -10,23 +10,25 @@ class Zaduzenje extends Eloquent
 	{
 		return $this->belongsTo('Knjiga');
 	}
-	public function user()
-	{
-		return $this->belongsTo('User');
-	}
-	public function zaduzenje(){
+	
+	public function zaduzenja(){
 		return DB::table('zaduzenja')
-		->join('users', 'user_id', '=', 'users.id')
-		->join('knjige', 'knjiga_id', '=', 'knjige.id')
+		->leftjoin('users', 'user_id', '=', 'users.id')
+		->leftjoin('knjige', 'knjiga_id', '=', 'knjige.id')
 		->get();
 		//return Knjiga::find(Input::get('id_knjige'))->zaduzenja;
 	}
 	public function zaduzenjaKorisnika($id){
 		return DB::table('zaduzenja')
-		->join('users', 'user_id', '=', 'users.id')
+		
 		->join('knjige', 'knjiga_id', '=', 'knjige.id')
+		->join('users', 'user_id', '=', 'users.id')
+		->select('zaduzenja.*', 'users.firstname', 'users.lastname', 'knjige.naziv', 'knjige.tehnologija', 'knjige.autor')
 		->where('user_id','=',$id)
 		->get();
+		
+		//return User::find($id)->zaduzenja;
+
 	}
 
 	public  function dodajZaduzenje($user){
@@ -60,15 +62,17 @@ class Zaduzenje extends Eloquent
 
 		if ($validator->passes()) {
 			
-			$id=Input::get('id');	
-			$zaduzenje = Zaduzenje::find($id);			
-			$zaduzenje->vracena = true;			
+			$id_zad=Input::get('id_zad');	
+			$zaduzenje = Zaduzenje::find($id_zad);			
+			$zaduzenje->vracena = true;	
 			$zaduzenje->save();
+		
 
-			$knjiga_id=Input::get('knjiga_id');
-			$knjiga = Knjiga::find($knjiga_id);
+			$id_knjige=Input::get('id_knjige');
+			$knjiga = Knjiga::find($id_knjige);
 			$knjiga->dostupnost=true;
 			$knjiga->save();
+				
 			
 		} else {
 			return Redirect::to('error')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();

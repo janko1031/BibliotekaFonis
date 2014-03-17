@@ -51,9 +51,10 @@ class KnjigeController extends BaseController {
 		$content='app'.'.'.'zaduzenja';
 
 		$zaduzenje = new Zaduzenje();
+		
 
-
-		$zaduzenja=$zaduzenje->zaduzenje();
+		$zaduzenja=$zaduzenje->zaduzenja();
+		
 		
 		if (!Auth::check()) {
 			$title="Login";
