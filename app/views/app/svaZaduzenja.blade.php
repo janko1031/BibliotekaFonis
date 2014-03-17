@@ -17,7 +17,7 @@
                         
                         <th>Tehnologija</th>
                         
-                         <th>Status </th>
+                         <th>Status i Vreme </th>
                     
                    
                         <th>Korisnik</th>
@@ -41,7 +41,7 @@
                          <td><span class="label label-success">Vracena</span>  {{ $zaduzenje->updated_at}}</td>
                          @endif 
                         @if($zaduzenje->vracena==0)
-                        <td><span class="label label-info">Zaduzena</span> {{ $zaduzenje->updated_at}} </td>
+                        <td><span class="label label-warning">Zaduzena</span> {{ $zaduzenje->updated_at}} </td>
                          @endif
                    
                     

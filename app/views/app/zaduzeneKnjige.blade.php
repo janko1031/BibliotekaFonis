@@ -18,7 +18,7 @@
                         
                         <th>Tehnologija</th>
                         
-                         <th>Status </th>
+                         <th>Datum i Vreme </th>
                     
                    
                         <th>Korisnik</th>
@@ -39,10 +39,10 @@
                     <td> {{ $zaduzenje->tehnologija}}</td>
 
                      @if($zaduzenje->vracena==1)
-                         <td><span class="label label-success">Vracena </span></td>
+                         <td>{{ $zaduzenje->created_at}}</td>
                          @endif 
                         @if($zaduzenje->vracena==0)
-                        <td><span class="label label-info">Zaduzena</span> </td>
+                        <td> {{ $zaduzenje->created_at}}</td>
                          @endif
                    
                     
