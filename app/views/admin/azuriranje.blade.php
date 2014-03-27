@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <label  class="col-lg-2 control-label">Godina</label>
                                     <div class="col-lg-10">
-                                        <input type="text" name="godina" class="form-control"  placeholder="godina izdanja" data-validation="number" data-validation-allowing="range[1900;2100]"  >
+                                        <input type="text" name="godina" class="form-control"  placeholder="godina izdanja" data-validation="custom" data-validation-regexp="^(19|20)\d{2}$"  >
 
                                     </div>
                                 </div>

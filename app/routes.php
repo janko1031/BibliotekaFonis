@@ -75,17 +75,18 @@ Route::get('/noAccess', 'HomeController@prikaziNoAccess');
 
 
 
+Route::model('knjiga', 'Knjiga');
+Route::model('komentar', 'Komentar');
 
 
-
-Route::get('/knjiga', 'KnjigeController@prikaziKnjigu');
+Route::get('/knjiga/{id}/','KnjigeController@prikaziKnjigu');
 Route::get('/spisakKnjiga', 'KnjigeController@prikaziKnjige');
 Route::get('/katalogKnjiga', 'KnjigeController@prikaziKatalog');
 
 
 
 Route::post('/delete', 'KnjigeController@obrisiKnjigu');
-Route::post('/knjiga', 'KnjigeController@unesiKomentar');
+Route::post('/knjiga/{{$id}}', 'KnjigeController@unesiKomentar');
 Route::post('/komentar', 'KnjigeController@izbrisiKomentar');
 Route::post('/unos', 'KnjigeController@uradiUnos');
 Route::post('/azuriranje', 'KnjigeController@uradiAzuriranje');

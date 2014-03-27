@@ -97,26 +97,29 @@ class KnjigeController extends BaseController {
 			->with('user', Auth::user());
 	}
 
-	public function prikaziKnjigu()
-	{	
+	public function prikaziKnjigu($id )
+	{
+   
 		$title="Prikaz knjige";
 		$content='app'.'.'.'knjiga';
 		$knjiga=new Knjiga();
 		$komentar = new Komentar();
 		
 		
-		$komentari=$komentar->komentari(1);		
-		$knjiga=$knjiga->nadjiKnjigu(1);
+		$komentari=$komentar->komentari2($id);		
+		$knjiga=$knjiga->nadjiKnjigu($id);
 
-		$prosek = $komentar->proscenaOcena(1);		
-		$oceni = $komentar->ocenjenaKnjiga(1,Auth::user()->id);
+		$prosek = $komentar->proscenaOcena($id);		
+		$oceni = $komentar->ocenjenaKnjiga($id,Auth::user()->id);
 
 		if (!Auth::check()) {
 			$title="Login";
 			return	View::make('users.login')->with('title',$title)->with('message', 'Morate bit ulogovani da biste videli  stranu!');
 		}	
 		else return View::make('template')->with('title',$title)->with('content',$content)->with('komentari',$komentari)->with('knjiga',$knjiga)
-			->with('user', Auth::user())->with('prosek',$prosek)->with('oceni',$oceni);;
+			->with('user', Auth::user())->with('prosek',$prosek)->with('oceni',$oceni);; //
+
+	
 	}
 	public function prikaziKatalog()
 	{
@@ -161,15 +164,18 @@ class KnjigeController extends BaseController {
 
 	public function unesiKomentar(){
 			$komentar= new Komentar();
-			$komentar->ubaciKomentar(1,Auth::user()->id);
-			return Redirect::to('/knjiga'); 		
+
+			$id=Input::get('id_knjige');
+			$komentar->ubaciKomentar(Auth::user()->id);
+			return Redirect::to("/knjiga/$id"); 		
 
 			}
 
 	public function izbrisiKomentar(){
 			$komentar= new Komentar();
-			$komentar->izbrisiKomentar(1,Auth::user()->id);	
-			return Redirect::to('/knjiga'); 
+			$id=Input::get('id_knjige');
+			$komentar->izbrisiKomentar(Auth::user()->id);	
+			return Redirect::to("/knjiga/$id"); 
 
 				}
 

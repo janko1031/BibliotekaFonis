@@ -11,7 +11,7 @@
     <div class="col-md-4 portfolio-item">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h5 class="panel-title"><a href="knjiga"><b>{{$knjiga->naziv}}</b></a></h5>
+          <h5 class="panel-title"><a href="{{ URL::to('knjiga/'.$knjiga->id) }}"><b>{{$knjiga->naziv}}</b></a></h5>
 
 
         </div>

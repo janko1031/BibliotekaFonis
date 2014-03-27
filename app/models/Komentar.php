@@ -23,7 +23,19 @@ class Komentar extends Eloquent
 		return Knjiga::find($id)->komentari;
 	
 	}
+	public function komentari2($id){//privremeno resenje
+		
+		return DB::table('komentari')
+		->leftjoin('users', 'user_id', '=', 'users.id')
+		->leftjoin('knjige', 'knjiga_id', '=', 'knjige.id')
+		->select('komentari.*', 'users.firstname', 'users.lastname')
+		->where('knjiga_id','=',$id)
+		->get();
+		
+	
+	}
 	public function proscenaOcena($id){
+
 		$data = Knjiga::find($id)->komentari;
 		
 		$broj=0;
@@ -38,18 +50,18 @@ class Komentar extends Eloquent
 		}
 		$uk=0;
 		if (empty($result)) {
-		return 0;
+		return "Knjiga nije ocenjena";
 		}
 		
 	}
-	public  function ubaciKomentar($knjiga,$user){
+	public  function ubaciKomentar($user){
 
 
 		$validator = Validator::make(Input::all(), Komentar::$rules);
 
 		if ($validator->passes()) {
 			$komentar = new Komentar;
-			$komentar->knjiga_id = $knjiga;
+			$komentar->knjiga_id = Input::get('id_knjige');
 			$komentar->user_id = $user;
 			$komentar->komentar = Input::get('komentar');
 			$komentar->ocena =Input::get('ocena');
@@ -80,6 +92,7 @@ class Komentar extends Eloquent
 		return $oceni;
 	}
 	public  function izbrisiKomentar($userId){
+
 		DB::table('komentari')->where('user_id', $userId)->delete();
 
 	}

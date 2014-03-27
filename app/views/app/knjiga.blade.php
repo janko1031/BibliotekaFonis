@@ -2,7 +2,8 @@
 <div class="col-md-9">
 
   <div class="thumbnail">
-    <img class="img-responsive" src="img/knjige.png" alt="">
+
+    <img class="img-responsive" src="{{asset('img/knjige.png')}}" alt="">
     <div class="caption-full">
     
 
@@ -29,7 +30,7 @@
            </h5>
          </div>
          <div class="col-md-3">
-         <h5><b>Prosecna ocena:</b>    {{ $prosek}}</h5>
+         <h5><b>Prosecna ocena:</b>  {{ $prosek }} </h5>
         </div>
         <div class="col-md-2">
         <h5 ><b>Godina :</b>    {{ $knjiga->godina_izdanja}}</h5>
@@ -76,7 +77,7 @@
       <span class="glyphicon glyphicon-star"></span>
       <span class="glyphicon glyphicon-star-empty"></span>
       <span class="glyphicon glyphicon-star-empty"></span>
-      <span class="glyphicon glyphicon-star-empty"></span>
+      
       <span class="glyphicon glyphicon-star-empty"></span>';
       break;
       case 3:
@@ -116,7 +117,8 @@
 <label for="textArea" class="col-lg-2 control-label">Tekst komentara</label>
 <div class="col-lg-10">
 <textarea class="form-control" rows="3" name="komentar" data-validation="length" data-validation-length="min6" ></textarea>
-
+ 
+        <input type="hidden" name="id_knjige" value="{{$knjiga->id}}">
 </div>
 </div>
 <div class="form-group">
@@ -152,6 +154,7 @@
    Mozete <strong>samo jednom</strong>  oceniti knjigu.
 </div>
 <input type="hidden" name="brisanje">
+<input type="hidden" name="id_knjige" value="{{$knjiga->id}}">
 <div class="text-right">
 
 <button class="btn btn-danger" type="submit">
