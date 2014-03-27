@@ -5,7 +5,7 @@ class KnjigeController extends BaseController {
 	public function prikaziUnos()
 	{
 		
-		$title="Unos";
+		$title="Unos nove knjige";
 		$content='admin'.'.'.'unos';
 
 		if (!Auth::check()) {
@@ -31,7 +31,7 @@ class KnjigeController extends BaseController {
 	}
 	public function prikaziAzuriranje()
 	{
-		$title="Azuriranje";
+		$title="Azuriranje knjige";
 		$content='admin'.'.'.'azuriranje';
 
 		$knjiga=new Knjiga();	

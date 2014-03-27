@@ -30,33 +30,14 @@ class Knjiga extends Eloquent{
 	
 
 	public  function knjige(){
-		return Knjiga::all();
+		return Knjiga::paginate(6);
 	}
 
 	public  function nadjiKnjigu($id){
 		$knjiga = Knjiga::find($id);
 		return $knjiga;
 	}
-	public function proscenaOcena($id){
 
-		$data = Knjiga::find($id)->komentari;
-		
-		$broj=0;
-		$uk=0;
-		
-			foreach ($data as $result) {
-			$uk+=$result->ocena;
-			$broj++;
-		}
-		if (!empty($result)) {
-		return $uk/$broj; 
-		}
-		$uk=0;
-		if (empty($result)) {
-		return "Knjiga nije ocenjenja";
-		}
-		
-	}
 
 	public  function ubaciKnjigu(){
 		$validator = Validator::make(Input::all(), Knjiga::$rules);

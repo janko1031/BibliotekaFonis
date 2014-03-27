@@ -16,7 +16,8 @@ class Zaduzenje extends Eloquent
 		->leftjoin('users', 'user_id', '=', 'users.id')
 		->leftjoin('knjige', 'knjiga_id', '=', 'knjige.id')
 		->select('zaduzenja.*', 'users.firstname', 'users.lastname', 'knjige.naziv', 'knjige.tehnologija', 'knjige.autor')
-		->get();
+		->paginate(8)
+		;
 		//return Knjiga::find(Input::get('id_knjige'))->zaduzenja;
 	}
 	public function vratiZaduzeneKnjige(){
@@ -25,7 +26,7 @@ class Zaduzenje extends Eloquent
 		->leftjoin('knjige', 'knjiga_id', '=', 'knjige.id')
 		->where('vracena','=',false)
 		->select('zaduzenja.*', 'users.firstname', 'users.lastname', 'knjige.naziv', 'knjige.tehnologija', 'knjige.autor')
-		->get();
+		->paginate(8);
 		//return Knjiga::find(Input::get('id_knjige'))->zaduzenja;
 	}
 	public function zaduzenjaKorisnika($id){
