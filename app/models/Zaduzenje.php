@@ -16,7 +16,8 @@ class Zaduzenje extends Eloquent
 		->leftjoin('users', 'user_id', '=', 'users.id')
 		->leftjoin('knjige', 'knjiga_id', '=', 'knjige.id')
 		->select('zaduzenja.*', 'users.firstname', 'users.lastname', 'knjige.naziv', 'knjige.tehnologija', 'knjige.autor')
-		->paginate(8)
+		->orderBy('updated_at','desc')
+		->paginate(10)
 		;
 		//return Knjiga::find(Input::get('id_knjige'))->zaduzenja;
 	}
@@ -25,8 +26,9 @@ class Zaduzenje extends Eloquent
 		->leftjoin('users', 'user_id', '=', 'users.id')
 		->leftjoin('knjige', 'knjiga_id', '=', 'knjige.id')
 		->where('vracena','=',false)
-		->select('zaduzenja.*', 'users.*', 'knjige.naziv', 'knjige.tehnologija', 'knjige.id')
+		->select('zaduzenja.*', 'users.firstname', 'users.lastname', 'knjige.naziv', 'knjige.tehnologija', 'knjige.autor')
 		->paginate(8);
+
 		//return Knjiga::find(Input::get('id_knjige'))->zaduzenja;
 	}
 	public function zaduzenjaKorisnika($id){
@@ -68,25 +70,24 @@ class Zaduzenje extends Eloquent
 
 	public  function razduziKnjigu(){
 
-
-		$validator = Validator::make(Input::all(), Komentar::$rules);
+			$validator = Validator::make(Input::all(), Komentar::$rules);
 
 		if ($validator->passes()) {
-			
-			$id_zad=Input::get('id_zad');	
-			$zaduzenje = Zaduzenje::find($id_zad);			
-			$zaduzenje->vracena = true;	
-			$zaduzenje->save();
-		
 
-			$id_knjige=Input::get('id_knjige');
-			$knjiga = Knjiga::find($id_knjige);
-			$knjiga->dostupnost=true;
-			$knjiga->save();
-				
-			
+		$id_zad=Input::get('id_zad');	
+		$zaduzenje = Zaduzenje::find($id_zad);	
+		$zaduzenje->vracena = true;	
+		$zaduzenje->save();
+
+
+		$id_knjige=Input::get('id_knjige');
+		$knjiga = Knjiga::find($id_knjige);
+		$knjiga->dostupnost=true;
+		$knjiga->save();
+
+
 		} else {
-			return Redirect::to('error')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
+		return Redirect::to('error')->with('message', 'The following errors occurred')->withErrors($validator)->withInput();
 		}
 
 	}

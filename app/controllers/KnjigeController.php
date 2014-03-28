@@ -183,13 +183,13 @@ class KnjigeController extends BaseController {
 	public function  dodajZaduzenje(){
 		$zaduzenje= new Zaduzenje();
 		$zaduzenje->dodajZaduzenje(Auth::user()->id);
-			return Redirect::to('/profil'); 		
+			return Redirect::to('/zaduzeneKnjige'); 		
 
 			}
 	public function  razduziKnjigu(){
 		$zaduzenje= new Zaduzenje();
 		$zaduzenje->razduziKnjigu();
-			return Redirect::to('/svaZaduzenja'); 		
+			return Redirect::to('/zaduzeneKnjige'); 		
 
 			}		
 
