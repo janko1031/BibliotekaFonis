@@ -62,8 +62,9 @@ Route::group(array('before' => 'role'), function() {
 	Route::get('/azuriranje', 'KnjigeController@prikaziAzuriranje');
 	Route::get('/svaZaduzenja', 'KnjigeController@prikaziSvaZaduzenja');
 	Route::get('/delete', 'KnjigeController@prikaziDelete');
-	Route::get('/profil', 'UsersController@prikaziProfil');
+	
 	Route::get('/zaduzeneKnjige', 'KnjigeController@prikaziZaduzene');
+	
 
 
 });
@@ -75,13 +76,13 @@ Route::get('/noAccess', 'HomeController@prikaziNoAccess');
 
 
 
-Route::model('knjiga', 'Knjiga');
-Route::model('komentar', 'Komentar');
-
 
 Route::get('/knjiga/{id}/','KnjigeController@prikaziKnjigu');
 Route::get('/spisakKnjiga', 'KnjigeController@prikaziKnjige');
 Route::get('/katalogKnjiga', 'KnjigeController@prikaziKatalog');
+Route::get('/pretraga', 'KnjigeController@prikaziPretragu');
+Route::get('/profil', 'UsersController@prikaziProfil');
+
 
 
 
@@ -92,5 +93,6 @@ Route::post('/unos', 'KnjigeController@uradiUnos');
 Route::post('/azuriranje', 'KnjigeController@uradiAzuriranje');
 Route::post('/zaduzenja', 'KnjigeController@dodajZaduzenje');
 Route::post('/profil', 'KnjigeController@razduziKnjigu');
+Route::post('/pretraga', 'KnjigeController@prikaziPretragu');
 
 Route::resource('posts', 'PostsController');

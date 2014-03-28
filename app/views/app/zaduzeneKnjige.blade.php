@@ -5,10 +5,14 @@
 
     <div class="col-lg-12">
         <div class="page-header">
-            <h1 >Spisak trentno zaduzenih knjiga</h1>
+            <h1 >Spisak trentno zaduzenih knjiga
+            </h1>
+
+      
         </div>
 
         <div class="bs-example table-responsive">
+        
             <table class="table table-striped table-bordered table-hover" id="tabela">
                 <thead>
                     <tr>

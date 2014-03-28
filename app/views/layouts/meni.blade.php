@@ -15,6 +15,9 @@
       <a href="{{ URL::to('svaZaduzenja') }}" class="list-group-item">Spisak svih zaduzenja </a>
       <a href="{{ URL::to('zaduzeneKnjige') }}" class="list-group-item"> Trenutno zaduzene knjige </a>
       @endif
+       @if(!$user->isAdmin())
+      <a href="{{ URL::to('profil') }}" class="list-group-item"> Prikazi moj profil </a>
+      @endif
 
     </div>
   </div>

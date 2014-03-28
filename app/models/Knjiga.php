@@ -6,18 +6,18 @@ class Knjiga extends Eloquent{
 		//'autor'=>'required|alpha|min:4',
 		//'tehnologija'=>'required|alpha|min:4',
 		//'opis'=>'required|alpha|min:4'
-	);
+		);
 
 	protected $table="knjige";
 	public $timestamps = false;
 	public function komentari()
-    {
-        return $this->hasMany('Komentar');
-    }
-    public function zaduzenja()
-    {
-        return $this->hasMany('Zaduzenje');
-    }
+	{
+		return $this->hasMany('Komentar');
+	}
+	public function zaduzenja()
+	{
+		return $this->hasMany('Zaduzenje');
+	}
 	/*public $naziv;
 	public $autor;
 	public $identifikator;
@@ -94,7 +94,26 @@ class Knjiga extends Eloquent{
 		$knjiga->delete();
 
 	}
-	
+	public function pretraziKnjige() {
+
+		$q = Input::get('poljePretrage');
+
+		$searchTerms = explode(' ', $q);
+		 $knjige = DB::table('knjige');
+		 $keyword=$q;
+		$query = $knjige->where('naziv', 'LIKE', "%{$keyword}%")
+		->orWhere('tehnologija', 'LIKE', "%{$keyword}%");
+
+		foreach($searchTerms as $term)
+		{
+			$query = $query->orWhere('opis', 'LIKE', '%'. $term .'%');
+		}
+
+		$results = $query->paginate(8);
+
+		return $results;
+
+	}
 	
 
 	

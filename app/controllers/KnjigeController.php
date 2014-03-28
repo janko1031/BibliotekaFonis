@@ -183,7 +183,7 @@ class KnjigeController extends BaseController {
 	public function  dodajZaduzenje(){
 		$zaduzenje= new Zaduzenje();
 		$zaduzenje->dodajZaduzenje(Auth::user()->id);
-			return Redirect::to('/zaduzeneKnjige'); 		
+			return Redirect::to('/profil'); 		
 
 			}
 	public function  razduziKnjigu(){
@@ -192,5 +192,20 @@ class KnjigeController extends BaseController {
 			return Redirect::to('/svaZaduzenja'); 		
 
 			}		
+
+	public function  prikaziPretragu(){
+		
+		$title= "Pretraga knjiga";
+		$knjiga= new Knjiga();
+		$knjige=$knjiga->pretraziKnjige();
+		$content='app'.'.'.'pretraga';
+		$keyword = Input::get('poljePretrage');
+		if (!Auth::check()) {
+			$title="Login";
+			return	View::make('users.login')->with('title',$title)->with('message', 'Morate bit ulogovani da biste videli  stranu!');
+		}	
+		else return View::make('template')->with('title',$title)->with('content',$content)->with('knjige',$knjige)->with('keyword',$keyword)
+			->with('user', Auth::user());
+		}
 	
 }

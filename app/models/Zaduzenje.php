@@ -25,7 +25,7 @@ class Zaduzenje extends Eloquent
 		->leftjoin('users', 'user_id', '=', 'users.id')
 		->leftjoin('knjige', 'knjiga_id', '=', 'knjige.id')
 		->where('vracena','=',false)
-		->select('zaduzenja.*', 'users.firstname', 'users.lastname', 'knjige.naziv', 'knjige.tehnologija', 'knjige.autor')
+		->select('zaduzenja.*', 'users.*', 'knjige.naziv', 'knjige.tehnologija', 'knjige.id')
 		->paginate(8);
 		//return Knjiga::find(Input::get('id_knjige'))->zaduzenja;
 	}

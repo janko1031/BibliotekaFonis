@@ -98,7 +98,15 @@ class Komentar extends Eloquent
 	}
 
 	public  function komentariKorisnika($id){
-		return User::find($id)->komentari;
+		//return User::find($id)->komentari;
+		return DB::table('komentari')
+		
+		->join('knjige', 'knjiga_id', '=', 'knjige.id')
+		->join('users', 'user_id', '=', 'users.id')
+		->select('komentari.komentar','komentari.created_at', 'users.firstname', 'users.lastname', 'knjige.*')
+		->where('user_id','=',$id)
+		->get();
+		
 
 	}
 }

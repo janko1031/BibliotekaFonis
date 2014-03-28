@@ -6,7 +6,7 @@
         <div class="page-header">
             <h1 >Spisak svih evidentiranih zaduzenja</h1>
         </div>
-
+        
         <div class="bs-example table-responsive">
             <table class="table table-striped table-bordered table-hover" id="tabela">
                 <thead>

@@ -27,9 +27,9 @@
           @foreach ($knjige as $knjiga) 
           
           
-          <tr>
+           <tr onclick="document.location = '{{ URL::to('knjiga/'.$knjiga->id) }}';">
             <td>{{ $knjiga->identifikator}} </td>
-            <td> {{ $knjiga->naziv}}</td>
+            <td><a> {{ $knjiga->naziv}}</a></td>
             <td>{{ $knjiga->autor}}</td>
             <td>{{ $knjiga->godina_izdanja}} </td>
             <td> {{ $knjiga->tehnologija}}</td>

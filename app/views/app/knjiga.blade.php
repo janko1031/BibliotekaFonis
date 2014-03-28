@@ -36,11 +36,37 @@
         <h5 ><b>Godina :</b>    {{ $knjiga->godina_izdanja}}</h5>
         </div>
 
-         
+          <hr>
+         <hr>
        </div>
+      
+           @if ($knjiga->dostupnost == 1)           
+        
+      <div class="col-md-5"> </div>        
+      <div class="col-md-4"> 
+        {{ Form::open(array('action' => 'KnjigeController@dodajZaduzenje', 'class'=>'bs-example form-horizontal')); }}    
+        <input type="hidden" name="id_knjige" value="{{$knjiga->id}}">
+        <a href="" type="submit"><button class="btn btn-success">
+         <i class="glyphicon glyphicon-check"></i> Rezervisi </button></a>
+
+         {{Form::close()}}
+       </div>
+       @endif  
+       @if ($knjiga->dostupnost == 0)
+       
+      <div class="col-md-5"> </div>        
+      <div class="col-md-4"> 
+       
+        <a href="#" type="button"><button class="btn btn-danger">
+         <i class="glyphicon glyphicon-ban-circle"></i> Nedostupna </button></a>
+
+
+       </div>
+      @endif
      </div>
 
    </div> 
+    
  </div>
  <div class="well">
 

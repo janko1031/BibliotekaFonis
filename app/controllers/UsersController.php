@@ -68,12 +68,12 @@ class UsersController extends BaseController {
 	}
 	public function prikaziProfil()
 	{
-		$title="Profil korisnika ".Auth::user()->username;
-		$content='admin'.'.'.'profil';
+		$title="Profil korisnika ";
+		$content='app'.'.'.'profil';
 		
 		$zaduzenje = new Zaduzenje();
 		$zaduzenja=$zaduzenje->zaduzenjaKorisnika(Auth::user()->id);
-		
+		$red=0;
 		$komentar = new Komentar();
 		$komentari=$komentar->komentariKorisnika(Auth::user()->id);
 		if (!Auth::check()) {
@@ -81,6 +81,7 @@ class UsersController extends BaseController {
 			return	View::make('users.login')->with('title',$title)->with('message', 'Morate bit ulogovani da biste videli  stranu!');
 		}	
 		else return View::make('template')->with('zaduzenja',$zaduzenja)->with('komentari',$komentari)->with('title',$title)->with('content',$content)
+			->with('red',$red)
 			->with('user', Auth::user());
 	}
 	
